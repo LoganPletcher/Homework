@@ -29,8 +29,40 @@ int main() //The main body of the code
 	cin.getline(usersinput, 100); //Allows the user to input whatever characters they wish and this specific way of user input prompt allows the user to use spaces
 	asciiFunction(usersinput); //Sends the char string usersinput to the asciiFunction and assigns it to the char string strASCII
 	char firstmidlast[3][100]; //creates a 2D character array to hold a string for your first, middle, and last name each
-	cout << "Type in and enter your first name: ";
-
+	for (int i = 0; i < 3; i++) //creates a for loop that will allow the user to input each part of their name into the 2D array
+	{
+		char name[100]; //creates a char string to hold a part of the name
+		if (firstmidlast[i] == firstmidlast[0]) //creates an if statement which will activate when the user must input the first part of their name
+		{
+			cout << "Please input your first name: "; //Tells the user that they must input the first part of their name
+			cin.getline(name, 100); //Allows the user to input the first part of their name
+			for (int j = 0; j < 100; j++) //loops through each character in the char string name
+			{
+				firstmidlast[i][j] = name[j]; //inserts the characters for each name into the firstmidlast 2D array
+			}
+		}
+		else if (firstmidlast[i] == firstmidlast[1]) //creates an if statement which will activate when the user must input the middle part of their name
+		{
+			cout << "Please input your middle name: "; //Tells the user that they must input the middle part of their name
+			cin.getline(name, 100); //Allows the user to input the middle part of their name
+			for (int j = 0; j < 100; j++) //loops through each character in the char string name
+			{
+				firstmidlast[i][j] = name[j]; //inserts the characters for each name into the firstmidlast 2D array
+			}
+		}
+		else
+		{
+			cout << "Please input your last name: "; //Tells the user that they must input the last part of their name
+			cin.getline(name, 100); //Allows the user to input the last part of their name
+			for (int j = 0; j < 100; j++) //loops through each character in the char string name
+			{
+				firstmidlast[i][j] = name[j]; //inserts the characters for each name into the firstmidlast 2D array
+			}
+		}
+	}
+	asciiFunction(firstmidlast[0]); //Sends the char string firstmidlast[0] to the asciiFunction and assigns it to the char string strASCII
+	asciiFunction(firstmidlast[1]); //Sends the char string firstmidlast[1] to the asciiFunction and assigns it to the char string strASCII
+	asciiFunction(firstmidlast[2]); //Sends the char string firstmidlast[2] to the asciiFunction and assigns it to the char string strASCII
 	system("pause"); //creates a pause for the system so the program does not shut down right after it is completed so the user may look at everything that was inputted and outputted
 	return 0; //returns a value of zero to the main function
 }
