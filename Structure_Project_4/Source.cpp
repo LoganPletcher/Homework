@@ -48,12 +48,29 @@ void CharacterCreation(PlayerAttributes Player[])
 	char findname[100];
 	cout << "Type in one of the player names to see their score. " << endl;
 	cin >> findname;
-	for (int i = 0; i > 5; i++)
+	if (strcmp(findname, Player[0].PlayerName) == 0)
 	{
-		if (strcmp(findname, Player[i].PlayerName) == 0)
-		{
-			cout << Player[i].PlayerName << "'s score is " << Player[i].PlayerScore << "." << endl;
-		}
+		cout << Player[0].PlayerName << "'s score is " << Player[0].PlayerScore << "." << endl;
+	}
+	else if (strcmp(findname, Player[1].PlayerName) == 0)
+	{
+		cout << Player[1].PlayerName << "'s score is " << Player[1].PlayerScore << "." << endl;
+	}
+	else if (strcmp(findname, Player[2].PlayerName) == 0)
+	{
+		cout << Player[2].PlayerName << "'s score is " << Player[2].PlayerScore << "." << endl;
+	}
+	else if (strcmp(findname, Player[3].PlayerName) == 0)
+	{
+		cout << Player[3].PlayerName << "'s score is " << Player[3].PlayerScore << "." << endl;
+	}
+	else if (strcmp(findname, Player[4].PlayerName) == 0)
+	{
+		cout << Player[4].PlayerName << "'s score is " << Player[4].PlayerScore << "." << endl;
+	}
+	else
+	{
+		cout << "The player name you are looking for does not match any of the existing players." << endl;
 	}
 }
 
