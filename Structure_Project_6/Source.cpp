@@ -27,7 +27,143 @@ int PurchaseTotal(int quantity, int priceperitem)
 	return PurchaseCost;
 }
 
-void ManageShop(Shop YourShop)
+void ManageShop(Shop TheShop)
+{
+	MainMenu:
+	system("cls");
+	cout << "1 Manage item prices" << endl << "2 Manage stock" << endl << "3 Sell items" << endl << "4 Check gold" << endl << "0 Quit Game" << endl << endl;
+	int x;
+	int j;
+	int y;
+	cin >> x;
+	cout << endl;
+	for (int i = 0; i < 2; i++)
+	{
+		if (x == 1)
+		{
+			ManageItemPrice:
+			system("cls");
+			cout << "Known Shop Items:" << endl;
+			for (int i = 0; i < 20; i++)
+			{
+				if (TheShop.ShopItems[i].known == 1)
+				{
+					cout << i + 1 << " " << TheShop.ShopItems[i].ItemName << ": Stocking Price: " << TheShop.ShopItems[i].stockingcost << ", ";
+					if (TheShop.ShopItems[i].listed == 1)
+					{
+						cout << "Selling Price: " << TheShop.ShopItems[i].sellingcost << endl;
+					}
+					else
+					{
+						cout << "Selling Price: Unlisted" << endl;
+					}
+				}
+				else
+				{
+					continue;
+				}
+			}
+			cout << "0 Back to Main Menu" << endl;
+			cin >> j;
+			j--;
+			for (int i = 0; i < 2; i++)
+			{
+				if (j == -1)
+				{
+					goto MainMenu;
+				}
+				else if (TheShop.ShopItems[j].known == 1)
+				{
+					system("cls");
+					cout << TheShop.ShopItems[j].ItemName << ": Stocking Price: " << TheShop.ShopItems[j].stockingcost << ", ";
+					if (TheShop.ShopItems[j].listed == 1)
+					{
+						cout << "Selling Price: " << TheShop.ShopItems[j].sellingcost << endl;
+					}
+					else
+					{
+						cout << "Selling Price: Unlisted" << endl;
+					}
+					cout << endl << "Do you want to set the selling price for " << TheShop.ShopItems[j].ItemName << "s?" << endl << "1 Yes" << endl << "0 No" << endl;
+					cin >> x;
+
+					if (x == 1)
+					{
+						system("cls");
+						cout << TheShop.ShopItems[j].ItemName << ": Stocking Price: " << TheShop.ShopItems[j].stockingcost << ", Selling Price: ";
+						cin >> TheShop.ShopItems[j].sellingcost;
+						TheShop.ShopItems[j].listed = 1;
+						goto ManageItemPrice;
+					}
+					else if (x == 0)
+					{
+						goto ManageItemPrice;
+					}
+					else
+					{
+						i = 0;
+						cout << "That is not a valid option. ";
+						cout << endl;
+						system("pause");
+					}
+				}
+			}
+		}
+		else if (x == 2)
+		{
+		}
+		else if (x == 3)
+		{
+		}
+		else if (x == 4)
+		{
+			for (int i = 0; i < 2; i++)
+			{
+				if (x == 4)
+				{
+					system("cls");
+					cout << "You have " << TheShop.gold << " gold." << endl << "0 Go Back to Main Menu" << endl;
+					break;
+				}
+				else
+				{
+					i = 0;
+					cout << "Hey, you entered the wrong character! Try again. ";
+					cin >> x;
+					cout << endl;
+				}
+			}
+			cin >> x;
+			if (x == 0)
+			{
+				goto MainMenu;
+			}
+			else
+			{
+				i = 0;
+				cout << "That is not a valid option. ";
+				cout << endl;
+				system("pause");
+			}
+		}
+		else if (x == 0)
+		{
+			system("cls");
+			cout << "Thank you for playing. Please come back again and we'll play some more!" << endl << endl;
+			break;
+		}
+		else
+		{
+			i = 0;
+			cout << "That is not a valid option. ";
+			cin >> x;
+			cout << endl;
+		}
+
+	}
+}
+
+void ShopTutorial(Shop YourShop)
 {
 	int j;
 	cout << "Hello Shop Owner! You have successfully set up shop in town! Let's go over what you have for now, shall we?" << endl;
@@ -77,7 +213,7 @@ void ManageShop(Shop YourShop)
 		if (YourShop.ShopItems[i].known == 1)
 		{
 			cout << i + 1 << " " << YourShop.ShopItems[i].ItemName << ": Stocking Price: " << YourShop.ShopItems[i].stockingcost << ", ";
-			if (YourShop.ShopItems[i].sellingcost > 0)
+			if (YourShop.ShopItems[i].listed == 1)
 			{
 				cout << "Selling Price: " << YourShop.ShopItems[i].sellingcost << endl;
 			}
@@ -327,6 +463,7 @@ void ManageShop(Shop YourShop)
 		if (x == 1)
 		{
 			cout << "How many " << YourShop.ShopItems[j].ItemName << "s do you wish to sell? " << endl << endl << "Remember, we are going to sell 3 Health Potions. So enter 3 when prompted." << endl;
+			break;
 		}
 		else
 		{
@@ -362,14 +499,48 @@ void ManageShop(Shop YourShop)
 			continue;
 		}
 	}
-
-
-
-
-
-
-
-
+	cout << "0 Go Back to Main Menu" << endl;
+	cin >> x;
+	cout << endl;
+	for (int i = 0; i < 2; i++)
+	{
+		if (x == 0)
+		{
+			system("cls");
+			cout << "1 Manage item prices" << endl << "2 Manage stock" << endl << "3 Sell items" << endl << "4 Check gold" << endl << "0 Quit Game" << endl << endl;
+			break;
+		}
+		else
+		{
+			i = 0;
+			cout << "Hey, you entered the wrong character! Try again. ";
+			cin >> x;
+			cout << endl;
+		}
+	}
+	cout << "Okay, this is the final part and it's pretty simple. We're going to check on how much gold you have. So enter 4 when you are prompted to enter something. ";
+	cin >> x;
+	cout << endl;
+	for (int i = 0; i < 2; i++)
+	{
+		if (x == 4)
+		{
+			system("cls");
+			cout << "You have " << YourShop.gold << " gold." << endl << "0 Go Back to Main Menu" << endl << endl << "Well, there we go! I know, really simple, wasn't it? Well, time to go ";
+			cout << "back to the Main Menu and let you have fun! So enter 0 when you are prompted to enter something. ";
+			break;
+		}
+		else
+		{
+			i = 0;
+			cout << "Hey, you entered the wrong character! Try again. ";
+			cin >> x;
+			cout << endl;
+		}
+	}
+	cin >> x;
+	cout << endl;
+	ManageShop(YourShop);
 }
 
 int main()
@@ -395,7 +566,29 @@ int main()
 	RPGShop.ShopItems[17] = { "Robes", 0, 5, 5, 1, 0 };
 	RPGShop.ShopItems[18] = { "Leather", 0, 10, 3, 1, 0 };
 	RPGShop.ShopItems[19] = { "Plate", 0, 20, 0, 0, 0 };
-	ManageShop(RPGShop);
+	cout << "Do you want to do the tutorial?" << endl << "1 Yes" << endl << "0 No" << endl;
+	int x;
+	cin >> x;
+	cout << endl;
+	for (int i = 0; i < 2; i++)
+	{
+		if (x == 1)
+		{
+			ShopTutorial(RPGShop);
+		}
+		else if (x == 0)
+		{
+			ManageShop(RPGShop);
+		}
+		else
+		{
+			i = 0;
+			cout << "Hey, you entered an invalid character! Try again. ";
+			cin >> x;
+			cout << endl;
+		}
+	}
+	
 	system("pause");
 	return 0;
 }
