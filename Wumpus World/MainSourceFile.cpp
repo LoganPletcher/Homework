@@ -4,161 +4,14 @@
 // Date Created: 9/8/2015
 // Brief: <description of the purpose of the file>
 ////////////////////////////////////////////////////////////
-
+#include "Player.h"
+#include "Pit.h"
+#include "Wumpus.h"
+#include "Gold.h"
 #include <iostream>
 using namespace std;
 
-struct Coordinates
-{
-	int x;
-	int y;
-};
-
-struct Perceptions
-{
-	bool glitter;
-	bool stench;
-	bool breeze;
-};
-
-struct Direction
-{
-	bool North;
-	bool South;
-	bool East;
-	bool West;
-};
-
-class Player
-{
-public:
-	Player(unsigned char, Coordinates, Direction);
-	void Movement(char);
-	void turn(char);
-	unsigned char symbol;
-	Coordinates position;
-	Direction facing;
-	bool havegold;
-
-private:
-
-};
-
 Player You{ 1, {3, 0}, {1, 0, 0, 0} };
-
-Player::Player(unsigned char s, Coordinates p, Direction f)
-{
-	symbol = s;
-	position = p;
-	facing = f;
-}
-
-void Player::Movement(char key)
-{
-	switch (key)
-	{
-	case 119:
-		position.x -= 1;
-		break;
-	case 115:
-		position.x += 1;
-		break;
-	case 100:
-		position.y += 1;
-		break;
-	case 97:
-		position.y -= 1;
-		break;
-	default:
-		break;
-	}
-}
-void Player::turn(char nesw)
-{
-	switch (nesw)
-	{
-	case 119:
-		position.x -= 1;
-		break;
-	case 115:
-		position.x += 1;
-		break;
-	case 100:
-		position.y += 1;
-		break;
-	case 97:
-		position.y -= 1;
-		break;
-	default:
-		break;
-	}
-}
-
-class Pit
-{
-public:
-	Pit(unsigned char, Coordinates);
-	~Pit();
-	unsigned char pitsymbol;
-	Coordinates pitposition;
-
-private:
-
-};
-
-Pit::Pit(unsigned char ps, Coordinates pp)
-{
-	pitsymbol = ps;
-	pitposition = pp;
-}
-
-Pit::~Pit()
-{
-}
-
-class Wumpus
-{
-public:
-	Wumpus(unsigned char, Coordinates);
-	~Wumpus();
-	unsigned char wumpussymbol;
-	Coordinates wumpusposition;
-
-private:
-
-};
-
-Wumpus::Wumpus(unsigned char ws, Coordinates wp)
-{
-	wumpussymbol = ws;
-	wumpusposition = wp;
-}
-
-Wumpus::~Wumpus()
-{
-}
-
-class Gold
-{
-public:
-	Gold(unsigned char, Coordinates);
-	~Gold();
-	unsigned char goldsymbol;
-	Coordinates goldposition;
-
-private:
-
-};
-
-Gold::Gold(unsigned char gs, Coordinates gp)
-{
-	goldsymbol = gs;
-	goldposition = gp;
-}
-
-Gold::~Gold()
-{
-}
 
 /*void grid(unsigned char player, int plcoordOne, int plcoordTwo,
 		  unsigned char pit1, int pi1coordOne, int pi1coordTwo,
@@ -200,6 +53,17 @@ Gold::~Gold()
 	}
 }*/
 
+void senses(Coordinates player, Coordinates pit1, Coordinates pit2, Coordinates wumpus, Coordinates gold)
+{
+	for (int i = 0; i < 2; i++)
+	{
+		if (player == 
+		{
+
+		}
+	}
+}
+
 void grid(unsigned char player, int plcoordOne, int plcoordTwo)
 {
 	unsigned char empty = 176;
@@ -227,8 +91,17 @@ int main()
 	Pit pittwo{ 254, {0, 0} };
 	Wumpus monster{ 2, {1, 3} };
 	Gold loot{ 36, {0, 3} };
+	pitone.surroundings(pitone.pitposition);
+	pittwo.surroundings(pittwo.pitposition);
+	monster.surroundings(monster.wumpusposition);
+	loot.surroundings(loot.goldposition);
 	user:
 	grid(You.symbol, You.position.x, You.position.y);
+	cout << endl;
+	senses(You.position,
+		pitone.left, pitone.right, pitone.up, pitone.down, 
+		pittwo.left, pittwo.right, pittwo.up, pittwo.down,
+		monster.left, monster.right, monster.up,
 	char input;
 	
 	if (You.position.x == pitone.pitposition.x && You.position.y == pitone.pitposition.y)
