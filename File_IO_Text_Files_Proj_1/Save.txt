@@ -1,0 +1,7 @@
+Favorite Number: 3
+Has the file been saved?
+1 = Yes
+0 = No
+1
+User's Rating: 9000
+Favorite Animal: b

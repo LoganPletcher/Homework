@@ -18,5 +18,13 @@
     <ClCompile Include="MainSourceFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainSourceFilev2.0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Save.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
