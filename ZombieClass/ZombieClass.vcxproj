@@ -119,7 +119,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MainSourceFile.cpp" />
-    <ClCompile Include="ZombieClassFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Zombie.h" />

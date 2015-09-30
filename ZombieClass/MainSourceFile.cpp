@@ -2,7 +2,7 @@
 // File: ZombieClass																										   //
 // Author: Logan Pletcher																									   //
 // Date Created: 9/28/2015																						  			   //
-// Brief: Creates a program that will create a random amount of zombies that will fight each other to the last zombie standing.//
+// Brief: Creates a program that will create two zombies with random attack and health that will fight each other to the death.//
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <iostream>
@@ -11,103 +11,67 @@
 #include <time.h>
 using namespace std;
 
-void ZombieCreation(Zombie Zambees[5])
+int main()
 {
+	srand(time(NULL));															//Clears the random value at the start of each run.
+	Zombie Zombies[5];
+	for (int i = 0; i < 5; i++)
+	{
+		Zombies[i].OccBonus();
+		Zombies[i].ZombieInfo();
+		cout << endl;
+	}
+	system("pause");
+	system("cls");
+	cout << "Battle, start!\n\n";
+	int intRound = 1;
+	while ( (Zombies[0].StartHealth > 0 && Zombies[1].StartHealth > 0)
+		|| (Zombies[0].StartHealth > 0 && Zombies[2].StartHealth > 0)
+		|| (Zombies[0].StartHealth > 0 && Zombies[3].StartHealth > 0)
+		|| (Zombies[0].StartHealth > 0 && Zombies[4].StartHealth > 0)
+		|| (Zombies[1].StartHealth > 0 && Zombies[2].StartHealth > 0)
+		|| (Zombies[1].StartHealth > 0 && Zombies[3].StartHealth > 0)
+		|| (Zombies[1].StartHealth > 0 && Zombies[4].StartHealth > 0)
+		|| (Zombies[2].StartHealth > 0 && Zombies[3].StartHealth > 0)
+		|| (Zombies[2].StartHealth > 0 && Zombies[4].StartHealth > 0)
+		|| (Zombies[3].StartHealth > 0 && Zombies[4].StartHealth > 0))
+	{
+		
+		cout << "Round " << intRound << ", start!\n\n";
+		for (int i = 0; i < 5; i++)
+		{
+			cout << "Zombie " << i + 1 << "'s turn.\n\n";
+			Zombies[i].ZombieInfo();
+			if (Zombies[i].StartHealth > 0)
+			{
+				int rndm = rand() % 5;
+				while (Zombies[rndm].StartHealth <= 0 || rndm == i)
+				{
+					rndm = rand() % 5;
+				}
+				cout << "Zombie " << i + 1 << " attacks Zombie " << rndm + 1 << ".\n\n";
+				Zombies[i].Attacking(Zombies[rndm]);
+			}
+			else
+			{
+				cout << "Zombie " << i + 1 << " is dead.\n\n";
+			}
+
+		}
+		intRound += 1;
+		system("pause");
+		system("cls");
+	}
 	
 	for (int i = 0; i < 5; i++)
 	{
-		srand(time(NULL));
-		Zambees[i].PrevOcc(Zambees[i]);
-		Zambees[i].OccBoosts(Zambees[i]);
-	}
-}
-
-
-
-int main()
-{
-	srand(time(NULL));
-	Zombie Zombies[5] = { { true, 20, rand() % 5 + 1 },
-						  { true, 20, rand() % 5 + 1 },
-						  { true, 20, rand() % 5 + 1 }, 
-						  { true, 20, rand() % 5 + 1 }, 
-						  { true, 20, rand() % 5 + 1 }, };
-	ZombieCreation(Zombies);
-battle:
-	for (int i = 0; i < 5; i++)
-	{
-		cout << Zombies[i].alive << endl;
-		if (Zombies[i].alive = true)
+		if (Zombies[i].StartHealth > 0)
 		{
-			srand(time(NULL));
-			int random2 = rand() % 5;
-			while (Zombies[random2].alive == false || random2 == i)
-			{
-				random2 = rand() % 5;
-			}
-			Zombies[random2].StartHealth -= Zombies[i].StartAttack;
-			cout << "Zombie " << i + 1 << " attacks Zombie " << random2 + 1 << ".\n";
-			cout << "Zombie " << random2 + 1 << " takes " << Zombies[i].StartAttack << " damage.\n";
-			Zombies[random2].Damage(Zombies[random2].StartHealth);
-			cout << "Zombie " << random2 + 1 << " has " << Zombies[random2].StartHealth << " health left.\n";
-			if (Zombies[random2].StartHealth <= 0)
-			{
-				cout << "Zombie " << random2 + 1 << " is slain.\n";
-				Zombies[random2].alive = false;
-				Zombies[random2].SecondDeath(Zombies[random2].alive);
-			}
+			cout << "Zombie " << i + 1 << " wins!\n\n";
+			Zombies[i].ZombieInfo();
+			cout << "\nFatality!\n";
 		}
-		system("pause");
-	}
-	if (Zombies[0].alive == true &&
-		Zombies[1].alive == false &&
-		Zombies[2].alive == false &&
-		Zombies[3].alive == false &&
-		Zombies[4].alive == false)
-	{
-		cout << "Zombie 1 wins!\nOccupation: ";
-		Zombies[0].Win(Zombies[0]);
-	}
-	else if (Zombies[0].alive == false &&
-		Zombies[1].alive == true &&
-		Zombies[2].alive == false &&
-		Zombies[3].alive == false &&
-		Zombies[4].alive == false)
-	{
-		cout << "Zombie 2 wins!\nOccupation: ";
-		Zombies[1].Win(Zombies[1]);
-	}
-	else if (Zombies[0].alive == false &&
-		Zombies[1].alive == false &&
-		Zombies[2].alive == true &&
-		Zombies[3].alive == false &&
-		Zombies[4].alive == false)
-	{
-		cout << "Zombie 3 wins!\nOccupation: ";
-		Zombies[2].Win(Zombies[2]);
-	}
-	else if (Zombies[0].alive == false &&
-		Zombies[1].alive == false &&
-		Zombies[2].alive == false &&
-		Zombies[3].alive == true &&
-		Zombies[4].alive == false)
-	{
-		cout << "Zombie 4 wins!\nOccupation: ";
-		Zombies[3].Win(Zombies[3]);
-	}
-	else if (Zombies[0].alive == false &&
-		Zombies[1].alive == false &&
-		Zombies[2].alive == false &&
-		Zombies[3].alive == false &&
-		Zombies[4].alive == true)
-	{
-		cout << "Zombie 5 wins!\nOccupation: ";
-		Zombies[4].Win(Zombies[4]);
-	}
-	else
-	{
-		goto battle;
 	}
 	system("pause");
-	return 0;
+	return 0;																	//end of program.
 }

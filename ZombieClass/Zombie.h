@@ -1,110 +1,86 @@
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
 #include <iostream>
-#include <cstdlib>		//Is included to allow the use of the rand function.
+#include <string>
+#include <cstdlib>			//Is included to allow the use of the rand function.
 #include <time.h>
 using namespace std;
-struct Occupation		//A struct to set up the possible previous occupations of the Zombie
-{
-	bool Peasant;		//A peasant, lowest of the low.
-	bool Thug;			//A thug, a measly scoundrel.
-	bool Knight;		//A knight, an honorable warrior.
-	bool Wizard;		//A wizard, a mighty caster of spells!
-	bool Cultist;		//A cultist, the best of the best.
-};
 
 class Zombie			//The class set up to process the data that coincides with a zombie and dictates how it acts.
 {
 public:
-	Zombie(bool, int, int);
-	void PrevOcc(Zombie);
-	void OccBoosts(Zombie);
-	void Damage(int);
-	void SecondDeath(bool);
-	void Win(Zombie);
-	bool alive;
+	Zombie();
+	void Attacking(Zombie &);
 	int StartHealth;
-	int StartAttack; // rand() % 5 + 1;
+	int StartAttack;
+	void ZombieInfo();
+	void OccBonus();
+	
 	
 
 private:
-	int Health;				//The Zombie's health, always starts at 20.
-	int Attack;				//The Zombie's attack value, is either 1, 2, 3, 4, or 5 without occupation bonuses.
-	Occupation Previous;	//The struct Occupation to link the variables to the zombie.
+	int Health;
+	int Attack;
+	string strOccupation;
 };
-
-Zombie::Zombie(bool a, int sh, int sa)
+Zombie::Zombie()
 {
-	alive = a;
-	StartHealth = sh;
-	Health = StartHealth;
-	StartAttack = sa;
-	Attack = StartAttack;
-}
-
-void Zombie::PrevOcc(Zombie z)
-{
-	srand(time(NULL));
-	int randomOcc = rand() % 5;
-	switch (randomOcc)
+	StartHealth = rand() % 6 + 20;
+	StartAttack = rand() % 10 + 1;
+	int random = rand() % 5;
+	switch (random)
 	{
 	case 0:
-		Previous.Peasant = true;
-		Previous.Thug = false;
-		Previous.Knight = false;
-		Previous.Wizard = false;
-		Previous.Cultist = false;
+		strOccupation = "Peasant";
 		break;
 	case 1:
-		Previous.Peasant = false;
-		Previous.Thug = true;
-		Previous.Knight = false;
-		Previous.Wizard = false;
-		Previous.Cultist = false;
+		strOccupation = "Thug";
 		break;
 	case 2:
-		Previous.Peasant = false;
-		Previous.Thug = false;
-		Previous.Knight = true;
-		Previous.Wizard = false;
-		Previous.Cultist = false;
+		strOccupation = "Knight";
 		break;
 	case 3:
-		Previous.Peasant = false;
-		Previous.Thug = false;
-		Previous.Knight = false;
-		Previous.Wizard = true;
-		Previous.Cultist = false;
+		strOccupation = "Wizard";
 		break;
 	case 4:
-		Previous.Peasant = false;
-		Previous.Thug = false;
-		Previous.Knight = false;
-		Previous.Wizard = false;
-		Previous.Cultist = true;
+		strOccupation = "Cultist";
 		break;
 	default:
 		break;
 	}
 }
 
-void Zombie::OccBoosts(Zombie thing)
+void Zombie::Attacking(Zombie &zz)
 {
-	if (Previous.Thug = 1)
+	zz.StartHealth -= this->StartAttack;
+}
+void Zombie::ZombieInfo()
+{
+	
+	Health = StartHealth;
+	cout << "This zombie has " << Health << " health." << endl;
+	Attack = StartAttack;
+	cout << "This zombie dishes out " << Attack << " damage." << endl;
+	cout << "This zombie was a " << strOccupation 
+		<< " before he died." << endl;
+}
+void Zombie::OccBonus()
+{
+	if (strOccupation == "Thug")
 	{
 		StartAttack += 4;
 	}
-	else if (Previous.Knight = 1)
+	else if (strOccupation == "Knight")
 	{
 		StartAttack += 6;
 		StartHealth += 5;
 	}
-	else if (Previous.Wizard = 1)
+	else if (strOccupation == "Wizard")
 	{
 		StartAttack += 8;
 		StartHealth += 10;
 	}
-	else if (Previous.Cultist = 1)
+	else if (strOccupation == "Cultist")
 	{
 		StartAttack += 10;
 		StartHealth += 20;
@@ -114,42 +90,4 @@ void Zombie::OccBoosts(Zombie thing)
 		StartAttack += 2;
 	}
 }
-
-void Zombie::Damage(int H)
-{
-	Health = H;
-}
-
-void Zombie::SecondDeath(bool a)
-{
-	alive = a;
-}
-
-void Zombie::Win(Zombie thing)
-{
-	if (Previous.Peasant == 1)
-	{
-		cout << "Peasant\n";
-	}
-	else if (Previous.Thug == 1)
-	{
-		cout << "Thug\n";
-	}
-	else if (Previous.Knight == 1)
-	{
-		cout << "Knight\n";
-	}
-	else if (Previous.Wizard == 1)
-	{
-		cout << "Wizard\n";
-	}
-	else
-	{
-		cout << "Cultist";
-	}
-	cout << "Remaining Health: "
-		<< Health << "\nDamage per Attack: "
-		<< StartAttack << endl;
-}
-
 #endif ZOMBIE_H
