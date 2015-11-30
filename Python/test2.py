@@ -1,0 +1,6 @@
+print ("Type in dick.")
+i = input()
+print ("Type in butt.")
+j = input()
+print ("If you are a cool dude it should print out dickbutt.")
+print (i + j)
