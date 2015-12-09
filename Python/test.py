@@ -1,5 +1,5 @@
-file = "Test.txt"
+file = "classNames.txt"
 infile = open(file,'r')
-for i in infile:
-	if(infile):
-		print(i)
+j = 0
+for i in sorted(infile):
+        print (i)
