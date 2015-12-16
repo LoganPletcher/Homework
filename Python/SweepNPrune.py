@@ -1,13 +1,9 @@
-import Vector Class
-from Vector Class import *
+import SquareClass
+from SquareClass import *
 
-object1 = Vector2D(5, 4)
-obj1xMax = object1.x + 20
+def Scanning(f_arg, *argv):
+    print ("first normal arg:", f_arg)
+    for arg in argv:
+        print ("another arg through *argv :", arg)
 
-object2 = Vector2D(8, 9)
-obj2xMax = object2.x + 75
-
-object3 = Vector2D(17, 7)
-obj3xMax = object3.x + 30
-
-object4 = Vector2D(50, 7)
+test_var_args('yasoob','python','eggs','test')
