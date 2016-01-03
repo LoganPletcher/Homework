@@ -1,7 +1,8 @@
 import Vector_Class
 from Vector_Class import *
 class Rectangle:
-    def __init__(self, a1, b1, a2, b2):
+    def __init__(self, a1, b1, a2, b2, t):
+        self.title = t
         self.minX = a1
         self.minY = b1
         self.maxX = a2
