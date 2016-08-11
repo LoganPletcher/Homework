@@ -6,7 +6,7 @@ class Animal
 public:
 	Animal();
 	//~Animal();
-	void walk();
+	virtual void walk() = 0;
 
 private:
 
@@ -66,6 +66,13 @@ int main()
 	Beagle George;
 	Persian Fluffy;
 	George.bark();
+	cout << "\n";
 	Fluffy.meow();
+	cout << "\n";
+	George.walk();
+	cout << "\n";
+	Fluffy.walk();
+	cout << "\n";
+	system("pause");
 	return 0;
 }
