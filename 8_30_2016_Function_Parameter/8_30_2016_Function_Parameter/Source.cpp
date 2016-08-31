@@ -7,16 +7,36 @@ int squared(int x)
 	return product;
 }
 
-void AddFuncToArray(int (*function)(int), FuncArray *intarray)
+void NULLING(int size, FuncArray *intarray)
 {
-	intarray[0] = function;
+	for (int i = 0; i < size; i++)
+	{
+		intarray[i] = NULL;
+	}
+}
+
+void AddIntFuncToArray(int (*function)(int), FuncArray *intarray, int arraysize)
+{
+	for (int i = 0; i < arraysize; i++)
+	{
+		if (intarray[i] == NULL)
+		{
+			intarray[i] = function;
+			break;
+		}
+	}
+	
 }
 
 int main()
 {
-	FuncArray Function[1];
-	AddFuncToArray(squared, Function);
+	FuncArray Function[4];
+	int size = (sizeof(Function) / sizeof(*Function));
+	NULLING(size, Function);
+	AddIntFuncToArray(squared, Function, size);
 	std::cout << Function[0](5) << std::endl;
+	AddIntFuncToArray(squared, Function, size);
+	std::cout << Function[1](10) << std::endl;
 	system("pause");
 	return 0;
 }
